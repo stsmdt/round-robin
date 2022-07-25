@@ -12,8 +12,8 @@ type RoundRobin interface {
 }
 
 type roundrobin struct {
-	urls      []*url.URL
-	nextIndex uint32
+	urls  []*url.URL
+	index uint32
 }
 
 // New returns a RoundRobin implementation
@@ -32,14 +32,14 @@ func (r *roundrobin) Next() *url.URL {
 	var next uint32
 
 	for {
-		prev := atomic.LoadUint32(&r.nextIndex)
+		prev := atomic.LoadUint32(&r.index)
 		next = prev + 1
 
 		if next > uint32(len(r.urls)) {
 			next = 1
 		}
 
-		if atomic.CompareAndSwapUint32(&r.nextIndex, prev, next) {
+		if atomic.CompareAndSwapUint32(&r.index, prev, next) {
 			break
 		}
 	}
