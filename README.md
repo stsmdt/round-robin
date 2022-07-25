@@ -1,5 +1,12 @@
 # round-robin
 
+[![Run Tests](https://github.com/stsmdt/round-robin/actions/workflows/roundrobin.yml/badge.svg?branch=main)](https://github.com/stsmdt/round-robin/actions/workflows/roundrobin.yml)
+[![codecov](https://codecov.io/gh/stsmdt/round-robin/branch/main/graph/badge.svg?token=CY1OHFI4YU)](https://codecov.io/gh/stsmdt/round-robin)
+[![Go Report Card](https://goreportcard.com/badge/github.com/stsmdt/round-robin)](https://goreportcard.com/report/github.com/stsmdt/round-robin)
+[![GoDoc](https://pkg.go.dev/badge/github.com/stsmdt/round-robin?status.svg)](https://pkg.go.dev/github.com/stsmdt/round-robin?tab=doc)
+[![Sourcegraph](https://sourcegraph.com/github.com/stsmdt/round-robin/-/badge.svg)](https://sourcegraph.com/github.com/stsmdt/round-robin?badge)
+[![Release](https://img.shields.io/github/release/stsmdt/round-robin.svg?style=flat-square)](https://github.com/stsmdt/round-robin/releases)
+
 A [go](https://go.dev/) implementation of the Round Robin balancing algorithm.
 
 ## Installation
