@@ -12,8 +12,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v3
       - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
       - uses: golangci/golangci-lint-action@v3.2.0
         with:
           args: --verbose
@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        go: [1.15, 1.16, 1.17, 1.18]
+        go: [1.16, 1.17, 1.18, 1.19]
         include:
           - os: ubuntu-latest
             go-build: ~/.cache/go-build
@@ -36,16 +36,11 @@ jobs:
       TESTTAGS: ${{ matrix.test-tags }}
       GOPROXY: https://proxy.golang.org
     steps:
+      - uses: actions/checkout@v3
       - name: Set up Go ${{ matrix.go }}
         uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go }}
-
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-
       - uses: actions/cache@v3
         with:
           path: |
@@ -56,8 +51,6 @@ jobs:
             ${{ runner.os }}-go-
       - name: Run Tests
         run: make test
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3
         with:
           flags: ${{ matrix.os }},go-${{ matrix.go }},${{ matrix.test-tags }}
