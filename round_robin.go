@@ -3,7 +3,8 @@ package roundrobin
 import (
 	"errors"
 	"net/url"
-	"sync/atomic"
+
+	"go.uber.org/atomic"
 )
 
 // RoundRobin is an interface which represents the round-robin balancing.
@@ -13,7 +14,7 @@ type RoundRobin interface {
 
 type roundrobin struct {
 	urls  []*url.URL
-	index uint32
+	index atomic.Uint32
 }
 
 // New returns a RoundRobin implementation
@@ -32,14 +33,14 @@ func (r *roundrobin) Next() *url.URL {
 	var next uint32
 
 	for {
-		prev := atomic.LoadUint32(&r.index)
+		prev := r.index.Load()
 		next = prev + 1
 
 		if next > uint32(len(r.urls)) {
 			next = 1
 		}
 
-		if atomic.CompareAndSwapUint32(&r.index, prev, next) {
+		if r.index.CompareAndSwap(prev, next) {
 			break
 		}
 	}
