@@ -22,7 +22,7 @@ go get -u github.com/stsmdt/round-robin
 2. Import it in your code:
 
 ```go
-import "github.com/stsmdt/round-robin"
+import roundrobin "github.com/stsmdt/round-robin"
 ```
 
 ## Example
@@ -33,23 +33,26 @@ package main
 import (
 	"net/url"
 
-	"github.com/stsmdt/round-robin"
+	roundrobin "github.com/stsmdt/round-robin"
 )
 
 func main() {
-	roundRobin, _ := roundrobin.New(
-		&url.URL{Host: "127.0.0.1"},
-		&url.URL{Host: "127.0.0.2"},
-		&url.URL{Host: "127.0.0.3"},
-		&url.URL{Host: "127.0.0.4"},
+	rr, _ := roundrobin.New(
+		[]url.URL{
+			{Host: "127.0.0.1"},
+			{Host: "127.0.0.2"},
+			{Host: "127.0.0.3"},
+			{Host: "127.0.0.4"},
+			{Host: "127.0.0.5"},
+		},
 	)
 
-	roundRobin.Next() // {Host: "127.0.0.1"}
-	roundRobin.Next() // {Host: "127.0.0.2"}
-	roundRobin.Next() // {Host: "127.0.0.3"}
-	roundRobin.Next() // {Host: "127.0.0.4"}
-	roundRobin.Next() // {Host: "127.0.0.1"}
-	roundRobin.Next() // {Host: "127.0.0.2"}
+	rr.Next() // {Host: "127.0.0.1"}
+	rr.Next() // {Host: "127.0.0.2"}
+	rr.Next() // {Host: "127.0.0.3"}
+	rr.Next() // {Host: "127.0.0.4"}
+	rr.Next() // {Host: "127.0.0.5"}
+	rr.Next() // {Host: "127.0.0.1"}
 }
 ```
 
