@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	roundrobin "github.com/stsmdt/round-robin"
+	roundrobin "github.com/stsmdt/round-robin/v2"
 )
 
 func TestNew_NoURLsProvided(t *testing.T) {
