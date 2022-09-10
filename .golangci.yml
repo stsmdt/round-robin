@@ -4,15 +4,26 @@ linters:
   enable:
     - asciicheck
     - dogsled
+    - durationcheck
     - errcheck
+    - errname
     - errorlint
+    - forbidigo
+    - forcetypeassert
     - gci
+    - godot
     - gofmt
     - goimports
     - gosec
+    - gosimple
     - govet
+    - ineffassign
     - misspell
     - nakedret
     - nilerr
+    - prealloc
     - revive
     - staticcheck
+    - unused
+    - wastedassign
+    - wsl
