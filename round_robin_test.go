@@ -121,8 +121,8 @@ func TestNext_GotURLMutation(t *testing.T) {
 	}
 
 	rr, err := roundrobin.New(givenURLs)
-
 	gotURLs := make([]url.URL, 0, len(wantURLs))
+
 	for i := 0; i < len(wantURLs); i++ {
 		gotURL := rr.Next()
 		gotURLs = append(gotURLs, gotURL)

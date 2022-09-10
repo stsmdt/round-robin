@@ -17,10 +17,10 @@ type roundrobin struct {
 	index atomic.Uint32
 }
 
-// ErrNoURLsProvided is the error that no URLs were provided
+// ErrNoURLsProvided is the error that no URLs were provided.
 var ErrNoURLsProvided = errors.New("no urls provided")
 
-// New returns a RoundRobin implementation
+// New returns a RoundRobin implementation.
 func New(urls []url.URL) (RoundRobin, error) {
 	if len(urls) == 0 {
 		return nil, ErrNoURLsProvided
@@ -33,7 +33,7 @@ func New(urls []url.URL) (RoundRobin, error) {
 	return rr, nil
 }
 
-// Next returns the next url
+// Next returns the next url.
 func (r *roundrobin) Next() url.URL {
 	var next uint32
 
